@@ -11,7 +11,7 @@ $username = 'admin';
 $password = 'admin123';
 $email = 'admin@ramendelivery.nl';
 
-// Check of admin al bestaat
+
 $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR role = 'admin'");
 $stmt->execute([$username]);
 if ($stmt->fetch()) {
@@ -20,7 +20,7 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// Maak admin gebruiker
+
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 $stmt = $pdo->prepare("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, 'admin')");
 $stmt->execute([$username, $hashed_password, $email]);
